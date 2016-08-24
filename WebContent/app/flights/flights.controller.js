@@ -1,15 +1,15 @@
 angular
-	.module('easytripAPI')
-	.controller('FlightsController', [ '$http', function($http, productsService) {
+	.module('easytripAPI.flights')
+	.controller('FlightsController', [ '$http', function($http) {
 		var vm = this;
 
 		vm.outbounddate =  new Date();
 
 		vm.submit = function(){
-			$http.get('http://localhost:8080/easytripAPI/rest/flights/BCN/ROM')
+			$http.get('http://localhost:8080/easytripAPI/rest/flights/BCN/ROME')
 			.success(function(data){
-				vm.flights = data;
-				console.log("Results " + vm.flights);
+				vm.flightsData = data;
+				console.log("Results " + vm.flightsData);
 	    	})
 	    	.error(function(data, status, headers, config) {
       			console.log("AJAX failed to get data, status=" + status);

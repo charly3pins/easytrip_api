@@ -1,6 +1,5 @@
 angular
 	.module('easytripAPI')
-	.controller('HomeController', function($scope) {
+	.controller('HomeController', function() {
 		var vm = this;
-		vm.currentNavItem = 'page1';
 	});

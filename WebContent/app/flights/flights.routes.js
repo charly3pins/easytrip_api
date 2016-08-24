@@ -1,5 +1,5 @@
 angular
-.module('easytripAPI')
+.module('easytripAPI.flights')
 .config(
 	function ($routeProvider) {
     	$routeProvider
@@ -8,11 +8,7 @@ angular
         		controller: 'FlightsController',
         		controllerAs: 'flights'
     		})
-			.when('/', {
-                templateUrl: 'app/home/views/home.html',
-                controller: 'HomeController',
-                controllerAs: 'home'
-            })
+			
 			.otherwise({redirectTo: '/'});
 	}
 );
