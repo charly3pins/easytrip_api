@@ -6,10 +6,7 @@ angular
 		vm.outbounddate =  new Date();
 
 		vm.submit = function(){
-			console.log("submit");
-			console.log(vm.outbounddate);
-
-			$http.get('http://localhost:8080/easytripAPI/flights/BCN/ROM')
+			$http.get('http://localhost:8080/easytripAPI/rest/flights/BCN/ROM')
 			.success(function(data){
 				vm.flights = data;
 				console.log("Results " + vm.flights);
