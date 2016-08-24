@@ -1,0 +1,79 @@
+
+<md-content class="md-padding">
+	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
+		<form name="projectForm" ng-submit="flights.submit()">
+			<md-input-container>
+				<label>API Key</label>
+				<input required type="text" name="apiKey" id="apiKey"></input>
+			</md-input-container>
+			
+			<md-checkbox class="md-primary" aria-label="Group Pricing" name="groupPricing" id="groupPricing" layout="row">
+				Group Pricing
+			</md-checkbox>
+
+			<md-input-container>
+				<label>Origen</label>
+				<input required type="text" name="originplace" id="originplace"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Destino</label>
+				<input required type="text" name="destinationplace" id="destinationplace"></input>
+			</md-input-container>
+			
+			<md-datepicker required ng-model="flights.outbounddate" md-placeholder="Fecha de salida" name="outbounddate" id="outbounddate"></md-datepicker>
+			
+			<md-datepicker ng-model="inbounddate" md-placeholder="Fecha de regreso" name="inbounddate" id="inbounddate"></md-datepicker>
+			
+			<md-input-container>
+				<label>Pais</label>
+				<input required type="text" name="country" id="country"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Idioma</label>
+				<input required type="text" name="locale" id="locale" value="es-ES"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Moneda</label>
+				<input required type="text" name="currency" id="currency"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Adultos</label>
+				<input required type="text" name="adults" id="adults"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Niños</label>
+				<input required type="text" name="children" id="children"></input>
+			</md-input-container>
+
+			<md-input-container>
+				<label>Bebes</label>
+				<input required type="text" name="infants" id="infants"></input>
+			</md-input-container>
+
+			<md-select ng-model="locationSchema" placeholder="Location Schema" name="locationSchema" id="locationSchema">
+	        	<md-option value="iata" selected="">Iata</md-option>
+	            <md-option value="geonamecode">GeoNameCode</md-option>
+	            <md-option value="geonameid">GeoNameId</md-option>
+	            <md-option value="rnid">Rnid</md-option>
+	            <md-option value="sky">Sky</md-option>
+	            <md-option value="default">Default</md-option>  
+			</md-select>
+			
+			<md-select ng-model="cabinClass" placeholder="Cabin Class" name="cabinclass" id="cabinclass">
+	        	<md-option value="Economy" selected="">Economy</md-option>
+	            <md-option value="PremiumEconomy">PremiumEconomy</md-option>
+	            <md-option value="Business">Business</md-option>
+	            <md-option value="First">First</md-option>
+			</md-select>
+
+			<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+				<md-button type="submit" aria-label="Find" class="md-raised md-primary">BUSCAR</md-button>
+			</section>
+		</form>
+	</div>
+</md-content>

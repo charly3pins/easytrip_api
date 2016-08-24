@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html ng-app="easytripAPI">
+<head>
+	<title>EasyTrip API</title>
+	<script src="js/angular/angular.min.js"></script>
+	<script src="js/angular/angular-route.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body ng-cloak layout="column">
+
+	<md-toolbar layout="row" class="md-toolbar-tools">
+		<h1>API EasyTrip</h1>
+      	<div class="md-toolbar-tools">
+			<span flex></span>
+			<md-button aria-label="Home" href="#home">Home</md-button>
+			
+			<span flex></span>
+			<md-button aria-label="About" href="#about">Sobre</md-button>
+		</div>
+	</md-toolbar>
+
+	<div flex layout="row">
+		<!-- Container #3 -->
+	    <md-sidenav md-is-locked-open="true" class="md-whiteframe-4dp">
+			<md-list>
+				<!-- List item #1 -->
+				<md-list-item>
+					<md-button aria-label="Flights" href="#flights">Vuelos</md-button>
+				</md-list-item>
+
+				<md-list-item>
+					<md-button aria-label="Hotels" href="#hotels">Hoteles</md-button>
+				</md-list-item>
+			</md-list>
+		</md-sidenav>
+
+		<!-- Container #4 -->
+		<md-content flex id="content">
+			<div ng-view></div>
+		</md-content>
+	</div>
+
+	<script src="app/home/home.module.js"></script>
+	<script src="app/home/home.controller.js"></script>
+	<script src="app/home/home.routes.js"></script>
+	<script src="app/flights/flights.module.js"></script>
+	<script src="app/flights/flights.controller.js"></script>
+	<script src="app/flights/flights.routes.js"></script>
+</body>
+</html>
