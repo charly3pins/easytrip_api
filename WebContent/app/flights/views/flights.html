@@ -1,60 +1,60 @@
 <md-content class="md-padding">
 	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
-		<form name="projectForm" ng-submit="submit()">
+		<form name="projectForm" ng-submit="flights.submit()">
 			<md-input-container layout="row">
 				<label>API Key</label>
-				<input required type="text" name="apiKey" id="apiKey" ng-model="formData.apiKey"></input>
+				<input required type="text" name="apiKey" id="apiKey" ng-model="flights.formData.apiKey"></input>
 			</md-input-container>
 			
-			<md-checkbox class="md-primary" aria-label="Group Pricing" name="groupPricing" id="groupPricing" layout="row" ng-model="formData.groupPricing">
+			<md-checkbox class="md-primary" aria-label="Group Pricing" name="groupPricing" id="groupPricing" layout="row" ng-model="flights.formData.groupPricing">
 				Group Pricing
 			</md-checkbox>
 
 			<md-input-container>
 				<label>Origen</label>
-				<input required type="text" name="originplace" id="originplace" ng-model="formData.originPlace"></input>
+				<input required type="text" name="originplace" id="originplace" ng-model="flights.formData.originPlace"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Destino</label>
-				<input required type="text" name="destinationplace" id="destinationplace"  ng-model="formData.destPlace"></input>
+				<input required type="text" name="destinationplace" id="destinationplace"  ng-model="flights.formData.destPlace"></input>
 			</md-input-container>
 			
-			<md-datepicker required md-placeholder="Fecha de salida" name="outbounddate" id="outbounddate" ng-model="formData.outboundDate"></md-datepicker>
+			<md-datepicker required md-placeholder="Fecha de salida" name="outbounddate" id="outbounddate" ng-model="flights.formData.outboundDate"></md-datepicker>
 			
-			<md-datepicker md-placeholder="Fecha de regreso" name="inbounddate" id="inbounddate" ng-model="formData.inboundDate" ></md-datepicker>
+			<md-datepicker md-placeholder="Fecha de regreso" name="inbounddate" id="inbounddate" ng-model="flights.formData.inboundDate" ></md-datepicker>
 			
 			<md-input-container>
 				<label>Pais</label>
-				<input required type="text" name="country" id="country" ng-model="formData.country"></input>
+				<input required type="text" name="country" id="country" ng-model="flights.formData.country"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Idioma</label>
-				<input required type="text" name="locale" id="locale" ng-model="formData.locale"></input>
+				<input required type="text" name="locale" id="locale" ng-model="flights.formData.locale"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Moneda</label>
-				<input required type="text" name="currency" id="currency" ng-model="formData.currency"></input>
+				<input required type="text" name="currency" id="currency" ng-model="flights.formData.currency"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Adultos</label>
-				<input required type="text" name="adults" id="adults" ng-model="formData.adults"></input>
+				<input required type="text" name="adults" id="adults" ng-model="flights.formData.adults"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Niños</label>
-				<input required type="text" name="children" id="children" ng-model="formData.children"></input>
+				<input required type="text" name="children" id="children" ng-model="flights.formData.children"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Bebes</label>
-				<input required type="text" name="infants" id="infants" ng-model="formData.infants"></input>
+				<input required type="text" name="infants" id="infants" ng-model="flights.formData.infants"></input>
 			</md-input-container>
 
-			<md-select placeholder="Location Schema" name="locationSchema" id="locationSchema" ng-model="formData.locationSchema">
+			<md-select placeholder="Location Schema" name="locationSchema" id="locationSchema" ng-model="flights.formData.locationSchema">
 	        	<md-option value="iata">Iata</md-option>
 	            <md-option value="geonamecode">GeoNameCode</md-option>
 	            <md-option value="geonameid">GeoNameId</md-option>
@@ -63,7 +63,7 @@
 	            <md-option value="default">Default</md-option>  
 			</md-select>
 			
-			<md-select placeholder="Cabin Class" name="cabinclass" id="cabinclass" ng-model="formData.cabinClass">
+			<md-select placeholder="Cabin Class" name="cabinclass" id="cabinclass" ng-model="flights.formData.cabinClass">
 	        	<md-option value="Economy">Economy</md-option>
 	            <md-option value="PremiumEconomy">PremiumEconomy</md-option>
 	            <md-option value="Business">Business</md-option>
@@ -78,7 +78,7 @@
 	<div>
 		<h4>RESULTS</h4>
 		<table id="flightsData" border="1">
-			{{flightsData}}
+			{{flights.flightsData}}
 		</table>
 	</div>
 </md-content>
