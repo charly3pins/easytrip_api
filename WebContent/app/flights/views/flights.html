@@ -12,17 +12,17 @@
 
 			<md-input-container>
 				<label>Origen</label>
-				<input required type="text" name="originplace" id="originplace" ng-model="flights.formData.originPlace"></input>
+				<input required type="text" name="originPlace" id="originPlace" ng-model="flights.formData.originPlace"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Destino</label>
-				<input required type="text" name="destinationplace" id="destinationplace"  ng-model="flights.formData.destPlace"></input>
+				<input required type="text" name="destinationPlace" id="destinationPlace"  ng-model="flights.formData.destPlace"></input>
 			</md-input-container>
 			
-			<md-datepicker required md-placeholder="Fecha de salida" name="outbounddate" id="outbounddate" ng-model="flights.formData.outboundDate"></md-datepicker>
+			<md-datepicker required md-placeholder="Fecha de salida" name="outboundDate" id="outboundDate" ng-model="flights.formData.outboundDate"></md-datepicker>
 			
-			<md-datepicker md-placeholder="Fecha de regreso" name="inbounddate" id="inbounddate" ng-model="flights.formData.inboundDate" ></md-datepicker>
+			<md-datepicker md-placeholder="Fecha de regreso" name="inboundDate" id="inboundDate" ng-model="flights.formData.inboundDate" ></md-datepicker>
 			
 			<md-input-container>
 				<label>Pais</label>
@@ -55,15 +55,15 @@
 			</md-input-container>
 
 			<md-select placeholder="Location Schema" name="locationSchema" id="locationSchema" ng-model="flights.formData.locationSchema">
-	        	<md-option value="iata">Iata</md-option>
-	            <md-option value="geonamecode">GeoNameCode</md-option>
-	            <md-option value="geonameid">GeoNameId</md-option>
-	            <md-option value="rnid">Rnid</md-option>
-	            <md-option value="sky">Sky</md-option>
-	            <md-option value="default">Default</md-option>  
+	        	<md-option value="Iata">Iata</md-option>
+	            <md-option value="GeoNameCode">GeoNameCode</md-option>
+	            <md-option value="GeoNameId">GeoNameId</md-option>
+	            <md-option value="Rnid">Rnid</md-option>
+	            <md-option value="Sky">Sky</md-option>
+	            <md-option value="Default">Default</md-option>  
 			</md-select>
 			
-			<md-select placeholder="Cabin Class" name="cabinclass" id="cabinclass" ng-model="flights.formData.cabinClass">
+			<md-select placeholder="Cabin Class" name="cabinClass" id="cabinClass" ng-model="flights.formData.cabinClass">
 	        	<md-option value="Economy">Economy</md-option>
 	            <md-option value="PremiumEconomy">PremiumEconomy</md-option>
 	            <md-option value="Business">Business</md-option>

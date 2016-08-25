@@ -1,6 +1,6 @@
 angular
 	.module('easytripAPI.flights')
-	.controller('FlightsController', [ '$http','$scope', function($http, $scope) {
+	.controller('FlightsController', [ '$http', function($http) {
 		var vm = this;
 
 		vm.formData = {};
