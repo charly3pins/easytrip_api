@@ -1,52 +1,31 @@
 package com.easytrip.rest.services;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
+import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
-
-import com.easytrip.rest.dto.HotelsRequest;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/hotels")
 public class HotelsService {
 	
-	private static String apiKey = "prtl6749387986743898559646983194";
-	
-	@POST
-    @Consumes({MediaType.APPLICATION_JSON})
-    @Produces({MediaType.TEXT_PLAIN})
-	
-	public Response postHotels(String input) throws Exception {
+	@GET
+	@Path("/{originplace}")
+	public Response getHotels(@PathParam("originplace") String origin) throws IOException {
+		
 //		http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v3
 //		/{market}/{currency}/{locale}/{entityid}/{checkindate}/{checkoutdate}/{guests}/{rooms}?apiKey={apiKey}[&pageSize={pageSize}][&imageLimit={imageLimit}]
 
-		ObjectMapper mapper = new ObjectMapper();
-		HotelsRequest hRequest = mapper.readValue(input, HotelsRequest.class);
-		
 		String baseUrl        	= "http://partners.api.skyscanner.net/";
 		String request = baseUrl + "apiservices/hotels/liveprices/v3/";
-		
-		String urlParameters = "/" + hRequest.getMarket() 
-	    		+ "/" + hRequest.getCurrency()
-	    		+ "/" + hRequest.getLocale() 
-	    		+ "/" + hRequest.getEntityId() // exemple: 27539733
-//	    		+ "/" + hRequest.getCheckinDate()
-//	    		+ "/" + hRequest.getCheckoutDate()
-	    		+ "/2016-09-30/2016-10-04" //TODO dates hardcoded fins que les tractem
-	    		+ "/" + hRequest.getGuests()
-	    		+ "/" + hRequest.getRooms()
-	    		+ "?apiKey=" + apiKey
-	    		//+ "&pageSize=" + hRequest.getPageSize() //TODO estudiar que fa
-	    		+ "&imageLimit=" + hRequest.getImageLimit();
-		
+		String urlParameters 	= "/ES/EUR/en-ES/27539733/2016-09-30/2016-10-04/2/1";
+		String apiKey 			= "?apiKey=prtl6749387986743898559646983194";
+		urlParameters += apiKey;
 		request += urlParameters;
 		URL    url            = new URL( request );
 		HttpURLConnection conn= (HttpURLConnection) url.openConnection();           

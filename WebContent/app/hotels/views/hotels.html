@@ -3,46 +3,46 @@
 		<form name="projectForm" ng-submit="hotels.submit()">
 			<md-input-container layout="row">
 				<label>API Key</label>
-				<input required ng-model="hotels.formData.apiKey" type="text" name="apiKey" id="apiKey" value="prtl6749387986743898559646983194"></input>
+				<input required type="text" name="apiKey" id="apiKey" value="prtl6749387986743898559646983194"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Origen</label>
-				<input required ng-model="hotels.formData.entityId" type="text" name="entityid" id="entityid" value="27544008"></input>
+				<input required type="text" name="entityid" id="entityid" value="27544008"></input>
 			</md-input-container>
 			
-			<md-datepicker required ng-model="hotels.formData.checkinDate" md-placeholder="Check-in" name="checkinDate" id="checkinDate"></md-datepicker>
+			<md-datepicker required ng-model="hotels.checkindate" md-placeholder="Check-in" name="checkindate" id="checkindate"></md-datepicker>
 			
-			<md-datepicker required ng-model="hotels.formData.checkoutDate" md-placeholder="Check-out" name="checkoutDate" id="checkoutDate"></md-datepicker>
+			<md-datepicker required ng-model="hotels.checkoutdate" md-placeholder="Check-out" name="checkoutdate" id=""checkoutdate""></md-datepicker>
 			
 			<md-input-container>
 				<label>Pais</label>
-				<input required ng-model="hotels.formData.market" type="text" name="market" id="market" value="ES"></input>
+				<input required type="text" name="country" id="country" value="ES"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Idioma</label>
-				<input required ng-model="hotels.formData.locale" type="text" name="locale" id="locale" value="es-ES"></input>
+				<input required type="text" name="locale" id="locale" value="es-ES"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Moneda</label>
-				<input required ng-model="hotels.formData.currency" type="text" name="currency" id="currency" value="EUR"></input>
+				<input required type="text" name="currency" id="currency" value="EUR"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Adultos</label>
-				<input required ng-model="hotels.formData.guests" type="text" name="guests" id="guests" value="2"></input>
+				<input required type="text" name="adults" id="adults" value="2"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Habitaciones</label>
-				<input required ng-model="hotels.formData.rooms" type="text" name="rooms" id="rooms" value="1"></input>
+				<input required type="text" name="rooms" id="rooms" value="1"></input>
 			</md-input-container>
 
 			<md-input-container>
 				<label>Núm. Imágenes (1-50)</label>
-				<input required ng-model="hotels.formData.imageLimit" type="text" name="imageLimit" id="imageLimit" value="3"></input>
+				<input required type="text" name="imageLimit" id="imageLimit" value="3"></input>
 			</md-input-container>
 
 			<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
@@ -52,8 +52,8 @@
 	</div>
 	<div>
 		<h4>RESULTS</h4>
-		<table id="hotelsData" border="1">
+		<div>
 			{{hotels.hotelsData}}
-		</table>
+		</div>
 	</div>
 </md-content>
