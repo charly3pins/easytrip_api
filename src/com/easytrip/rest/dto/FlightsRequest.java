@@ -1,6 +1,13 @@
 package com.easytrip.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class FlightsRequest {
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String API_KEY = "prtl6749387986743898559646983194";
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String BASE_URL = "http://partners.api.skyscanner.net/apiservices/pricing/v1.0/";
+	
 	private String apiKey;
 	private String adults;
 	private String children;
@@ -93,12 +100,4 @@ public class FlightsRequest {
 	public void setCabinClass(String cabinClass) {
 		this.cabinClass = cabinClass;
 	}
-	@Override
-	public String toString() {
-		return "FlightsRequest [apiKey=" + apiKey + ", adults=" + adults + ", children=" + children + ", country="
-				+ country + ", currency=" + currency + ", destPlace=" + destPlace + ", groupPricing=" + groupPricing
-				+ ", infants=" + infants + ", locale=" + locale + ", originPlace=" + originPlace + ", outboundDate="
-				+ outboundDate + ", locationSchema=" + locationSchema + ", cabinClass=" + cabinClass + "]";
-	}
-
 }

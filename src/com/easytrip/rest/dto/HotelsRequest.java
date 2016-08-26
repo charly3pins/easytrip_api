@@ -1,6 +1,14 @@
 package com.easytrip.rest.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 public class HotelsRequest {
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String API_KEY = "prtl6749387986743898559646983194";
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String HOTELS_URL = "http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v3/";
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String BASE_URL = "http://partners.api.skyscanner.net/";	
 	///{market}/{currency}/{locale}/{entityid}/{checkindate}/{checkoutdate}/{guests}/{rooms}?apiKey={apiKey}[&pageSize={pageSize}][&imageLimit={imageLimit}]
 	String apiKey;
 	String pageSize;

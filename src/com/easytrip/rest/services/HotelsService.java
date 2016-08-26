@@ -1,7 +1,5 @@
 package com.easytrip.rest.services;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -17,9 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/hotels")
 public class HotelsService {
-	
-	private static String apiKey = "prtl6749387986743898559646983194";
-	
+		
 	@POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_PLAIN})
@@ -31,9 +27,6 @@ public class HotelsService {
 		ObjectMapper mapper = new ObjectMapper();
 		HotelsRequest hRequest = mapper.readValue(input, HotelsRequest.class);
 		
-		String baseUrl        	= "http://partners.api.skyscanner.net/";
-		String request = baseUrl + "apiservices/hotels/liveprices/v3/";
-		
 		String urlParameters = "/" + hRequest.getMarket() 
 	    		+ "/" + hRequest.getCurrency()
 	    		+ "/" + hRequest.getLocale() 
@@ -43,65 +36,27 @@ public class HotelsService {
 	    		+ "/2016-09-30/2016-10-04" //TODO dates hardcoded fins que les tractem
 	    		+ "/" + hRequest.getGuests()
 	    		+ "/" + hRequest.getRooms()
-	    		+ "?apiKey=" + apiKey
+	    		+ "?apiKey=" + HotelsRequest.API_KEY
 	    		//+ "&pageSize=" + hRequest.getPageSize() //TODO estudiar que fa
 	    		+ "&imageLimit=" + hRequest.getImageLimit();
 		
-		request += urlParameters;
-		URL    url            = new URL( request );
-		HttpURLConnection conn= (HttpURLConnection) url.openConnection();           
-		conn.setDoOutput( true );
-		conn.setInstanceFollowRedirects( false );
-		conn.setRequestMethod( "GET" );
-		conn.setRequestProperty( "Content-Type", "application/x-www-form-urlencoded"); 
-		conn.setRequestProperty("Accept", "application/json");
-		conn.setRequestProperty( "charset", "utf-8");
-		conn.setUseCaches( false );
+		URL url = new URL( HotelsRequest.HOTELS_URL + "" + urlParameters );
+		
+	    CommonServices cService = new CommonServices();
+	    HttpURLConnection conn = cService.doConnection(url, "GET");
 		
 		StringBuffer response = new StringBuffer();
 		
-		try{
-			int responseCode = conn.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + url);
-			System.out.println("Response Code : " + responseCode);
-			System.out.println("Response Message : " + conn.getResponseMessage());
-			System.out.println("Header Fields : " + conn.getHeaderFields());
-			System.out.println("Location : " + conn.getHeaderFields().get("Location").get(0));
+		response = cService.getResponseFromConnection(conn);
 			
-			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			String inputLine;
+		String requestPoll = HotelsRequest.BASE_URL + conn.getHeaderFields().get("Location").get(0);
+		conn.disconnect();
 			
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-			System.out.println(response.toString());
-			
-			String requestPoll = baseUrl + conn.getHeaderFields().get("Location").get(0);
-			conn.disconnect();
-			URL urlPoll = new URL ( requestPoll );
-			conn = (HttpURLConnection) urlPoll.openConnection();
-			conn.setDoOutput(true);
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded"); 
-			conn.setRequestProperty("Accept", "application/json");
-			conn.setRequestProperty("charset", "utf-8");
-			responseCode = conn.getResponseCode();
-			System.out.println("\nSending 'GET' request to URL : " + urlPoll);
-			System.out.println("Response Code : " + responseCode);
-			System.out.println("Header Fields : " + conn.getHeaderFields());
-				
-			in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-			
-			while ((inputLine = in.readLine()) != null) {
-				response.append(inputLine);
-			}
-			in.close();
-			System.out.println(response.toString());
-		} catch (Exception e){
-			System.out.println(e);
-		}
-		
+		URL urlPoll = new URL (requestPoll);
+	    conn = cService.doConnection(urlPoll, "GET");
+
+		response = cService.getResponseFromConnection(conn);
+
 		return Response.status(200).entity(response.toString()).build();
 	}
 }
