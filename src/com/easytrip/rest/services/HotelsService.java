@@ -19,7 +19,6 @@ public class HotelsService {
 	@POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_PLAIN})
-	
 	public Response postHotels(String input) throws Exception {
 //		http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v3
 //		/{market}/{currency}/{locale}/{entityid}/{checkindate}/{checkoutdate}/{guests}/{rooms}?apiKey={apiKey}[&pageSize={pageSize}][&imageLimit={imageLimit}]
