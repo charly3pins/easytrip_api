@@ -21,7 +21,6 @@ public class FlightsService {
 	@POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_PLAIN})
-
 	public Response postFlights(String input) throws Exception {		
 		ObjectMapper mapper = new ObjectMapper();
 		FlightsRequest fRequest = mapper.readValue(input, FlightsRequest.class);
