@@ -1,15 +1,15 @@
 <md-content class="md-padding">
 	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
 		<form name="projectForm" ng-submit="hotels.submit()">
-			<md-input-container layout="row">
-				<label>API Key</label>
-				<input required ng-model="hotels.formData.apiKey" type="text" name="apiKey" id="apiKey" value="prtl6749387986743898559646983194"></input>
-			</md-input-container>
-
-			<md-input-container>
-				<label>Origen</label>
-				<input required ng-model="hotels.formData.entityId" type="text" name="entityid" id="entityid" value="27544008"></input>
-			</md-input-container>
+			<md-autocomplete md-input-name="autocompleteField" md-selected-item="hotels.selectedItem" 
+				md-search-text="hotels.searchText"
+				md-selected-item-change="hotels.selectedItemChange()" 
+				md-items="item in hotels.searchTextChange()" md-item-text="item.display_name" 
+				md-floating-label="Destino o nombre del hotel">
+				<md-item-template>
+					<span md-highlight-text="hotels.searchText">{{item.display_name}}, {{item.localised_geo_type}}</span>
+				</md-item-template>
+			</md-autocomplete>
 			
 			<md-datepicker required ng-model="hotels.formData.checkinDate" md-placeholder="Check-in" name="checkinDate" id="checkinDate"></md-datepicker>
 			

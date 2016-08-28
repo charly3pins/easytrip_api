@@ -8,9 +8,10 @@ public class HotelsRequest {
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static String HOTELS_URL = "http://partners.api.skyscanner.net/apiservices/hotels/liveprices/v3/";
 	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String HOTELS_AUTOSUGGEST_URL = "http://partners.api.skyscanner.net/apiservices/hotels/autosuggest/v2/";
+	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static String BASE_URL = "http://partners.api.skyscanner.net/";	
 	///{market}/{currency}/{locale}/{entityid}/{checkindate}/{checkoutdate}/{guests}/{rooms}?apiKey={apiKey}[&pageSize={pageSize}][&imageLimit={imageLimit}]
-	String apiKey;
 	String pageSize;
 	String imageLimit;
 	String market;
@@ -22,12 +23,6 @@ public class HotelsRequest {
 	String guests;
 	String rooms;
 	
-	public String getApiKey() {
-		return apiKey;
-	}
-	public void setApiKey(String apiKey) {
-		this.apiKey = apiKey;
-	}
 	public String getPageSize() {
 		return pageSize;
 	}
@@ -90,7 +85,7 @@ public class HotelsRequest {
 	}
 	@Override
 	public String toString() {
-		return "HotelsRequest [apiKey=" + apiKey + ", pageSize="+ pageSize +", imageLimit=" + imageLimit +", market=" + market 
+		return "HotelsRequest [apiKey=" + API_KEY + ", pageSize="+ pageSize +", imageLimit=" + imageLimit +", market=" + market 
 				+ ", currency=" + currency + ", locale=" + locale + ", entityId=" + entityId + ", checkinDate=" + checkinDate 
 				+ ", checkoutDate=" + checkoutDate + ", guests=" + guests + ", rooms=" + rooms + "]";
 	}
