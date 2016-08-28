@@ -1,0 +1,66 @@
+V2
+<md-content class="md-padding">
+	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
+		<div layout-gt-sm="row">
+			<md-autocomplete md-input-name="autocompleteField" 
+			md-selected-item="hotels.selectedItem" md-search-text="hotels.searchText" 
+			md-items="item in hotels.searchTextChange()" md-item-text="item.name" 
+			md-floating-label="Destino o nombre del hotel">
+				<md-item-template>
+					<span md-highlight-text="hotels.searchText">{{item.name}}</span>
+				</md-item-template>
+			</md-autocomplete>
+		</div>
+	
+<!-- 		<form name="hotelsForm" ng-submit="hotels.submit()"> -->
+<!-- 			<md-input-container> -->
+<!-- 				<label>Origen</label> -->
+<!-- 				<input required ng-model="hotels.formData.entityId" type="text" name="entityid" id="entityid" value="27544008"></input> -->
+<!-- 			</md-input-container> -->
+			
+<!-- 			<md-datepicker required ng-model="hotels.formData.checkinDate" md-placeholder="Check-in" name="checkinDate" id="checkinDate"></md-datepicker> -->
+			
+<!-- 			<md-datepicker required ng-model="hotels.formData.checkoutDate" md-placeholder="Check-out" name="checkoutDate" id="checkoutDate"></md-datepicker> -->
+			
+<!-- 			<md-input-container> -->
+<!-- 				<label>Pais</label> -->
+<!-- 				<input required ng-model="hotels.formData.market" type="text" name="market" id="market" value="ES"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<md-input-container> -->
+<!-- 				<label>Idioma</label> -->
+<!-- 				<input required ng-model="hotels.formData.locale" type="text" name="locale" id="locale" value="es-ES"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<md-input-container> -->
+<!-- 				<label>Moneda</label> -->
+<!-- 				<input required ng-model="hotels.formData.currency" type="text" name="currency" id="currency" value="EUR"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<md-input-container> -->
+<!-- 				<label>Adultos</label> -->
+<!-- 				<input required ng-model="hotels.formData.guests" type="text" name="guests" id="guests" value="2"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<md-input-container> -->
+<!-- 				<label>Habitaciones</label> -->
+<!-- 				<input required ng-model="hotels.formData.rooms" type="text" name="rooms" id="rooms" value="1"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<md-input-container> -->
+<!-- 				<label>Núm. Imágenes (1-50)</label> -->
+<!-- 				<input required ng-model="hotels.formData.imageLimit" type="text" name="imageLimit" id="imageLimit" value="3"></input> -->
+<!-- 			</md-input-container> -->
+
+<!-- 			<section layout="row" layout-sm="column" layout-align="center center" layout-wrap> -->
+<!-- 				<md-button type="submit" aria-label="Find" class="md-raised md-primary">BUSCAR</md-button> -->
+<!-- 			</section> -->
+<!-- 		</form> -->
+	</div>
+	<div>
+		<h4>RESULTS</h4>
+		<table id="hotelsData" border="1">
+			{{hotels.hotelsData}}
+		</table>
+	</div>
+</md-content>

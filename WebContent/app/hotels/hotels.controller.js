@@ -1,11 +1,10 @@
 angular
 	.module('easytripAPI.hotels')
-	.controller('HotelsController', [ '$http', function($http) {
+	.controller('HotelsController', [ '$http', '$q', function($http, $q) {
 		var vm = this;
 
 		vm.formData = {};
 		vm.formData = {
-				apiKey : "prtl6749387986743898559646983194",
 				market : "ES",
 				currency : "EUR", 
 				locale : "es-ES",
@@ -19,7 +18,7 @@ angular
 
 		vm.submit = function(){
  	        
-	        var res = $http.post('http://localhost:8080/easytripAPI/rest/hotels', JSON.stringify(vm.formData));
+	        var res = $http.post('http://localhost:8080/easytripAPI/rest/hotels/postHotel', JSON.stringify(vm.formData));
 			
 			res.success(function(data, status, headers, config) {
 				vm.hotelsData = data;
@@ -28,5 +27,28 @@ angular
 			res.error(function(data, status, headers, config) {
 				console.log("AJAX failed to get data, status=" + status);
       		});
+		}
+		
+		vm.searchText = "";
+		vm.selectedItem = [];
+		vm.searchTextChange = function () {
+			console.log("getHotels time!");
+			if(vm.searchText.length > 2){
+				console.log("buscando: " + vm.searchText);
+				return $http.get("http://localhost:8080/easytripAPI/rest/hotels/getSuggestHotel/"+vm.searchText)
+					.then(function(response){
+						console.log("Respondiendo....");
+						if(typeof response.data === 'object'){
+							return response.data;
+						} else {
+							// invalid response
+							return $q.reject(response.data);
+						}
+					}, 
+					function(response){
+						// something went wrong
+						return $q.reject(response.data);
+					});
+			}
 		}
 	}]);
