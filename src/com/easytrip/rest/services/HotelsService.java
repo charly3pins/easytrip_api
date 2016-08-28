@@ -12,7 +12,11 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.easytrip.rest.dto.HotelAutoSuggestResponse;
 import com.easytrip.rest.dto.HotelsRequest;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/hotels")
@@ -25,7 +29,7 @@ public class HotelsService {
 	public Response getSuggestHotels(@PathParam("query") String query) throws Exception {
 //		{market}/{currency}/{locale}/{query}?apikey={apikey}
 		
-//		ObjectMapper mapper = new ObjectMapper();
+		ObjectMapper mapper = new ObjectMapper();
 //		HotelsRequest hRequest = mapper.readValue(input, HotelsRequest.class);
 		
 		String urlParameters = "ES/EUR/es-ES/" + query + "?apiKey=" + HotelsRequest.API_KEY;
@@ -51,16 +55,14 @@ public class HotelsService {
 		StringBuffer response = new StringBuffer();
 		
 		response = cService.getResponseFromConnection(conn);
-			
-		String requestPoll = HotelsRequest.BASE_URL + conn.getHeaderFields().get("Location").get(0);
-		conn.disconnect();
-			
-		URL urlPoll = new URL (requestPoll);
-	    conn = cService.doConnection(urlPoll, "GET");
+		
+		JsonFactory factory = mapper.getFactory(); // since 2.1 use mapper.getFactory() instead
+		JsonParser jp = factory.createParser(response.toString());
+		HotelAutoSuggestResponse hotelAutoSuggestResponse = mapper.readValue(jp, HotelAutoSuggestResponse.class);
+		
+		String jsonResponse = mapper.writeValueAsString(hotelAutoSuggestResponse.getResults());
 
-		response = cService.getResponseFromConnection(conn);
-
-		return Response.status(200).entity(response.toString()).build();
+		return Response.status(200).entity(jsonResponse).build();
 	}
 	
 	@POST

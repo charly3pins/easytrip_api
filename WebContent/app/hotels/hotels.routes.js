@@ -4,7 +4,7 @@ angular
 	function ($routeProvider) {
     	$routeProvider
     		.when('/hotels', {
-        		templateUrl: 'app/hotels/views/hotelsv2.html',
+        		templateUrl: 'app/hotels/views/hotels.html',
         		controller: 'HotelsController',
         		controllerAs: 'hotels'
     		})
