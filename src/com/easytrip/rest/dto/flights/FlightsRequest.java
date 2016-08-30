@@ -1,4 +1,4 @@
-package com.easytrip.rest.dto;
+package com.easytrip.rest.dto.flights;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -19,6 +19,7 @@ public class FlightsRequest {
 	private String locale;
 	private String originPlace;
 	private String outboundDate;
+	private String inboundDate;
 	private String locationSchema;
 	private String cabinClass;
 
@@ -99,5 +100,11 @@ public class FlightsRequest {
 	}
 	public void setCabinClass(String cabinClass) {
 		this.cabinClass = cabinClass;
+	}
+	public String getInboundDate() {
+		return inboundDate;
+	}
+	public void setInboundDate(String inboundDate) {
+		this.inboundDate = inboundDate;
 	}
 }

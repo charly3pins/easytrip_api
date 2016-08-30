@@ -12,7 +12,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.easytrip.rest.dto.FlightsRequest;
+import com.easytrip.rest.dto.flights.FlightsLivePrices;
+import com.easytrip.rest.dto.flights.FlightsRequest;
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Path("/flights")
@@ -24,7 +27,6 @@ public class FlightsService {
 	public Response postFlights(String input) throws Exception {		
 		ObjectMapper mapper = new ObjectMapper();
 		FlightsRequest fRequest = mapper.readValue(input, FlightsRequest.class);
-		
 		StringBuffer response = new StringBuffer();
 
 		URL url = new URL( FlightsRequest.BASE_URL );	    
@@ -57,7 +59,14 @@ public class FlightsService {
 	    conn = cService.doConnection(urlPoll, "GET");
 		
 		response = cService.getResponseFromConnection(conn);
-
+		
+		ObjectMapper mapperResponse = new ObjectMapper();
+		JsonFactory factory = mapperResponse.getFactory();
+		JsonParser jp = factory.createParser(response.toString());
+		FlightsLivePrices flightsLivePrices = mapperResponse.readValue(jp, FlightsLivePrices.class);
+		
+		String jsonResponse = mapperResponse.writeValueAsString(flightsLivePrices);
+		System.out.println(jsonResponse);
 		return Response.status(200).entity(response.toString()).build();
 	}
 }
