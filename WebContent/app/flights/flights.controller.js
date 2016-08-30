@@ -15,7 +15,7 @@ angular
 					locale : "es-ES",
 					originPlace : "BCN",
 					outboundDate : new Date(),
-					locationSchema : "iata",
+					locationSchema : "Iata",
 					cabinClass : "Economy"};
 		
 		vm.submit = function(){
