@@ -10,9 +10,19 @@ public class PlansRequest {
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static String REDIRECT_CALLBACK = "Callback URL";
 	
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String OAuth = "1PGZEAUTMYNUQ4HTUQOKKDBDCTQG1OQEJCBEOV1JMKGOSHYL";
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String BASE_URL = "https://api.foursquare.com/v2/";
+	
+	String method;
+	
 	String latitudeLongitude;
 	String near;
 	String placeDate;
+	
+	//explore
+	String section;
 	
 	public String getLatitudeLongitude() {
 		return latitudeLongitude;
@@ -31,5 +41,17 @@ public class PlansRequest {
 	}
 	public void setPlaceDate(String placeDate) {
 		this.placeDate = placeDate;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
 	} 
 }

@@ -7,6 +7,7 @@ angular
 		vm.formData = {
 				latitudeLongitude: "41.396985, 2.148277",
 				near : "Barcelona",
+				section : "sights",
 				placeDate : new Date()};
 		
 		vm.submit = function(){
