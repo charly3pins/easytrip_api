@@ -1,4 +1,4 @@
-package com.easytrip.rest.dto;
+package com.easytrip.rest.dto.hotels;
 
 import java.util.List;
 

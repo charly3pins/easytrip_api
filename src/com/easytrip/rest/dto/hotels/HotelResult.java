@@ -1,4 +1,4 @@
-package com.easytrip.rest.dto;
+package com.easytrip.rest.dto.hotels;
 
 public class HotelResult {
 	String display_name;
