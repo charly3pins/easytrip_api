@@ -2,6 +2,8 @@ package com.easytrip.rest.services;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -12,8 +14,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.easytrip.rest.dto.HotelAutoSuggestResponse;
-import com.easytrip.rest.dto.HotelsRequest;
+import com.easytrip.rest.dto.hotels.Hotel;
+import com.easytrip.rest.dto.hotels.HotelAutoSuggestResponse;
+import com.easytrip.rest.dto.hotels.HotelsRequest;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -105,7 +108,17 @@ public class HotelsService {
 	    conn = cService.doConnection(urlPoll, "GET");
 
 		response = cService.getResponseFromConnection(conn);
+		
+		JsonNode rootNode = mapper.readValue(response.toString(), 
+				JsonNode.class);     
+		JsonNode hotels = rootNode.get("hotels");
+		
+		List<Hotel> hotelsList = Arrays.asList(mapper.readValue(hotels.toString(), 
+				Hotel[].class));
+//		for(Hotel h : hotelsList){
+//			System.out.println(h.toString());
+//		}
 
-		return Response.status(200).entity(response.toString()).build();
+		return Response.status(200).entity(hotels.toString()).build();
 	}
 }

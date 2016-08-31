@@ -51,9 +51,9 @@
 		</form>
 	</div>
 	<div>
-		<h4>RESULTS</h4>
-		<table id="hotelsData" border="1">
-			{{hotels.hotelsData}}
-		</table>
+		<h4>RESULTS {{hotels.items.length}}</h4>
+<div  ng-repeat="hotel in hotels.items">
+Name : {{hotel.name}} || Id : {{hotel.hotel_id}} || Popularidad : {{hotel.popularity}} || Calidad : {{hotel.popularity_desc}} || Stars : {{hotel.star_rating}}
+</div>
 	</div>
 </md-content>

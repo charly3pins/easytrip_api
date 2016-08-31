@@ -1,4 +1,4 @@
-package com.easytrip.rest.dto;
+package com.easytrip.rest.dto.hotels;
 
 public class HotelPlace {
 	String place_id;

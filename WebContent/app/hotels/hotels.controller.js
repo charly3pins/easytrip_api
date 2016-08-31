@@ -15,13 +15,13 @@ angular
 				rooms : "1",
 				pageSize : "1",
 				imageLimit : "3"};
-
+		vm.items = [];
 		vm.submit = function(){
  	        
 	        var res = $http.post('http://localhost:8080/easytripAPI/rest/hotels/postHotel', JSON.stringify(vm.formData));
 			
 			res.success(function(data, status, headers, config) {
-				vm.hotelsData = data;
+				vm.items = data;
 			});
 
 			res.error(function(data, status, headers, config) {
