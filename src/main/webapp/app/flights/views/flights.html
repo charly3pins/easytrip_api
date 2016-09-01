@@ -75,10 +75,50 @@
 			</section>
 		</form>
 	</div>
-	<div>
-		<h4>RESULTS</h4>
-		<table id="flightsData" border="1">
-			{{flights.flightsData}}
-		</table>
-	</div>
+<!-- 	<div> -->
+<!-- 		<h4>RESULTS</h4> -->
+<!-- 		<table id="flightsData" border="1"> -->
+<!-- 			{{flights.flightsData}} -->
+<!-- 		</table> -->
+<!-- 	</div> -->
+	<table>
+		<tr>
+			<th>ida ID</th>
+			<th>ida ORIGEN</th>
+			<th>ida DESTINO</th>
+			<th>ida SALIDA</th>
+			<th>ida LLEGADA</th>
+			<th>ida N. ESCALAS</th>
+			<th>ida MINUTOS DEL VIAJE</th>
+			<th>ida COMPAÑIAS</th>
+			<th>vuelta ID</th>
+			<th>vuelta ORIGEN</th>
+			<th>vuelta DESTINO</th>
+			<th>vuelta SALIDA</th>
+			<th>vuelta LLEGADA</th>
+			<th>vuelta N. ESCALAS</th>
+			<th>vuelta MINUTOS DEL VIAJE</th>
+			<th>vuelta COMPAÑIAS</th>
+			<th>PRECIOS</th>
+		</tr>
+		<tr ng-repeat="itinerary in flights.flightsData.itineraryList">
+			<td>{{itinerary.outboundFlight.id}}</td>
+			<td>{{itinerary.outboundFlight.originStation}}</td>
+			<td>{{itinerary.outboundFlight.destinationStation}}</td>
+			<td>{{itinerary.outboundFlight.departure}}</td>
+			<td>{{itinerary.outboundFlight.arrival}}</td>
+			<td>{{itinerary.outboundFlight.stops}}</td>
+			<td>{{itinerary.outboundFlight.durationInMinutes}}</td>
+			<td>{{itinerary.outboundFlight.marketingCarriers}}</td>
+			<td>{{itinerary.inboundFlight.id}}</td>
+			<td>{{itinerary.inboundFlight.originStation}}</td>
+			<td>{{itinerary.inboundFlight.destinationStation}}</td>
+			<td>{{itinerary.inboundFlight.departure}}</td>
+			<td>{{itinerary.inboundFlight.arrival}}</td>
+			<td>{{itinerary.inboundFlight.stops}}</td>
+			<td>{{itinerary.inboundFlight.durationInMinutes}}</td>
+			<td>{{itinerary.inboundFlight.marketingCarriers}}</td>
+			<td ng-repeat="price in itinerary.prices">{{price.agent}} || {{price.amount}} || {{price.deeplink}}</td>
+		</tr>
+	</table>
 </md-content>
