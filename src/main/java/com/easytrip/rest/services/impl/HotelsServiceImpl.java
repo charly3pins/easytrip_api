@@ -103,11 +103,12 @@ public class HotelsServiceImpl implements HotelsService {
 		
 		List<Hotel> hotelsList = Arrays.asList(mapper.readValue(hotels.toString(), 
 				Hotel[].class));
+		String hotelListString = mapper.writeValueAsString(hotelsList);
 //		for(Hotel h : hotelsList){
 //			System.out.println(h.toString());
 //		}
 
 //		return Response.status(200).entity(hotels.toString()).build();
-		return hotels.toString();
+		return hotelListString.toString();
 	}
 }

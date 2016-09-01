@@ -1,11 +1,15 @@
 package com.easytrip.rest.models.hotels.response;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Hotel {
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String IMAGE_BASE_URL = "http://d16eaqi26omzol.cloudfront.net/available/";
+	
 	private String name;
 	private List<String> types;
 	private Integer hotel_id;
@@ -22,6 +26,7 @@ public class Hotel {
     private String tag;
     private Integer star_rating;
     private Float distance_from_search;
+    private List<String> origPictureUrls;
     
 	public String getName() {
 		return name;
@@ -93,6 +98,11 @@ public class Hotel {
 		return image_urls;
 	}
 	public void setImage_urls(List<String> image_urls) {
+		List<String> urls = new LinkedList<String>();
+		for(String image : image_urls){
+			urls.add(IMAGE_BASE_URL + image.replaceAll(".*available\\{\\/", "").replaceAll("\\/:.*", "\\/") + HotelImages.ORIG);
+		}
+		this.origPictureUrls = urls;
 		this.image_urls = image_urls;
 	}
 	public Integer getScore() {
@@ -126,6 +136,12 @@ public class Hotel {
 				+ ", popularity_desc=" + popularity_desc + ", amenities=" + amenities + ", latitude=" + latitude
 				+ ", longitude=" + longitude + ", image_urls=" + image_urls + ", score=" + score + ", tag=" + tag
 				+ ", star_rating=" + star_rating + ", distance_from_search=" + distance_from_search + "]";
+	}
+	public List<String> getOrigPictureUrls() {
+		return origPictureUrls;
+	}
+	public void setOrigPictureUrls(List<String> pictureUrls) {
+		this.origPictureUrls = pictureUrls;
 	}
     
 }
