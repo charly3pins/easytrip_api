@@ -5,17 +5,24 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.easytrip.rest.models.flights.FlightsRequest;
+import com.easytrip.rest.models.flights.response.Agents;
 import com.easytrip.rest.models.flights.response.BookingDetailsLink;
+import com.easytrip.rest.models.flights.response.Carriers;
 import com.easytrip.rest.models.flights.response.FlightsLivePrices;
 import com.easytrip.rest.models.flights.response.Itineraries;
 import com.easytrip.rest.models.flights.response.Legs;
+import com.easytrip.rest.models.flights.response.Places;
 import com.easytrip.rest.models.flights.response.PricingOptions;
+import com.easytrip.rest.models.flights.response.processed.Agent;
+import com.easytrip.rest.models.flights.response.processed.Airport;
+import com.easytrip.rest.models.flights.response.processed.Carrier;
 import com.easytrip.rest.models.flights.response.processed.Flight;
 import com.easytrip.rest.models.flights.response.processed.FlightsResponse;
 import com.easytrip.rest.models.flights.response.processed.Itinerary;
@@ -91,35 +98,130 @@ public class FlightsServiceImpl implements FlightsService{
 			
 			//4. Buscamos las propiedades en las Legs de la respuesta
 			for(Legs leg : flightsLivePrices.getLegs()){
+				// IDA
 				if(outboundLegId.equals(leg.getId())){
-					outboundFlight.setOriginStation(leg.getOriginStation()); // TODO ir a Places y cambiarlo por la desc
-					outboundFlight.setDestinationStation(leg.getDestinationStation()); // TODO ir a Places y cambiarlo por la desc
+					Airport origin = new Airport();
+					origin.setId(leg.getOriginStation());
+					Airport destination = new Airport();
+					destination.setId(leg.getDestinationStation());
+					outboundFlight.setOriginStation(origin);
+					outboundFlight.setDestinationStation(destination);
 					outboundFlight.setDeparture(leg.getDeparture()); // TODO formatear fecha y hora
 					outboundFlight.setArrival(leg.getArrival()); // TODO formatear feacha y hora
 					outboundFlight.setStops(leg.getStops().length);
 					outboundFlight.setDurationInMinutes(leg.getDuration()); // TODO formatear para mostrar en hora + minutos
 					outboundFlight.setJourneyMode(leg.getJourneyMode());
-					outboundFlight.setMarketingCarriers(leg.getCarriers().toString()); // TODO ir a Carriers y cambiarlo por la desc
-				} else if(inboundLegId.equals(leg.getId())){ // TODO CHECK NOT NULL
-					inboundFlight.setOriginStation(leg.getOriginStation());
-					inboundFlight.setDestinationStation(leg.getDestinationStation());
-					inboundFlight.setDeparture(leg.getDeparture());
-					inboundFlight.setArrival(leg.getArrival());
+					List<Carrier> marketingCarriersList = new ArrayList<Carrier>();
+					outboundFlight.setMarketingCarriers(marketingCarriersList);
+					for(String carrierId : leg.getCarriers()){
+						Carrier carrier = new Carrier();
+						carrier.setId(carrierId);
+						outboundFlight.getMarketingCarriers().add(carrier);
+					}
+				} 
+				// VUELTA
+				else if(inboundLegId.equals(leg.getId())){ // TODO CHECK NOT NULL
+					Airport origin = new Airport();
+					origin.setId(leg.getOriginStation());
+					Airport destination = new Airport();
+					destination.setId(leg.getDestinationStation());
+					inboundFlight.setOriginStation(origin);
+					inboundFlight.setDestinationStation(destination);
+					inboundFlight.setDeparture(leg.getDeparture());// TODO formatear fecha y hora
+					inboundFlight.setArrival(leg.getArrival());// TODO formatear feacha y hora
 					inboundFlight.setStops(leg.getStops().length);
-					inboundFlight.setDurationInMinutes(leg.getDuration());
+					inboundFlight.setDurationInMinutes(leg.getDuration());// TODO formatear para mostrar en hora + minutos
 					inboundFlight.setJourneyMode(leg.getJourneyMode());
-					inboundFlight.setMarketingCarriers(leg.getCarriers().toString());
+					List<Carrier> marketingCarriersList = new ArrayList<Carrier>();
+					inboundFlight.setMarketingCarriers(marketingCarriersList);
+					for(String carrierId : leg.getCarriers()){
+						Carrier carrier = new Carrier();
+						carrier.setId(carrierId);
+						inboundFlight.getMarketingCarriers().add(carrier);
+					}
 				}
 			}
+			
+			//5. Buscamos los ids de los sitios y cogemos su codigo y nombre
+			for(Places place : flightsLivePrices.getPlaces()){
+				// IDA
+				if(outboundFlight.getOriginStation().getId().equals(place.getId())){
+					outboundFlight.getOriginStation().setCode(place.getCode());
+					outboundFlight.getOriginStation().setName(place.getName());
+				} else if(outboundFlight.getDestinationStation().getId().equals(place.getId())){
+					outboundFlight.getDestinationStation().setCode(place.getCode());
+					outboundFlight.getDestinationStation().setName(place.getName());
+				} 
+				// VUELTA
+				//TODO CHECK NOT NULL
+				if(inboundFlight.getOriginStation().getId().equals(place.getId())){
+					inboundFlight.getOriginStation().setCode(place.getCode());
+					inboundFlight.getOriginStation().setName(place.getName());
+				} else if(inboundFlight.getDestinationStation().getId().equals(place.getId())){
+					inboundFlight.getDestinationStation().setCode(place.getCode());
+					inboundFlight.getDestinationStation().setName(place.getName());
+				}
+			}
+			
+			//6. Buscamos los ids de los operadores y cogemos su codigo, descripcion, urlImagen y codigo a mostrar
+			// IDA
+			Iterator<Carrier> outboundIterator = outboundFlight.getMarketingCarriers().listIterator();
+			List<Carrier> auxCarrierList = new ArrayList<Carrier>();
+			while(outboundIterator.hasNext()){
+				Carrier carrier = outboundIterator.next();
+				for(Carriers carriers : flightsLivePrices.getCarriers()){
+					if(carrier.getId().equals(carriers.getId())){
+						carrier.setCode(carriers.getCode());
+						carrier.setName(carriers.getName());
+						carrier.setImageUrl(carriers.getImageUrl());
+						carrier.setDisplayCode(carriers.getDisplayCode());
+						auxCarrierList.add(carrier);
+						break; // FIXME revisar como hacer para que al encontrarlo salga del bucle. Como lo tendremos en BD tampoco creo que haga falta hacer esto luego...
+					}
+				}
+			}
+			outboundFlight.setMarketingCarriers(auxCarrierList);
+			
+			// VUELTA 
+			//TODO CHECK NOT NULL
+			Iterator<Carrier> inboundIterator = inboundFlight.getMarketingCarriers().listIterator();
+			auxCarrierList.clear();
+			while(inboundIterator.hasNext()){
+				Carrier carrier = inboundIterator.next();
+				for(Carriers carriers : flightsLivePrices.getCarriers()){
+					if(carrier.getId().equals(carriers.getId())){
+						carrier.setCode(carriers.getCode());
+						carrier.setName(carriers.getName());
+						carrier.setImageUrl(carriers.getImageUrl());
+						carrier.setDisplayCode(carriers.getDisplayCode());
+						auxCarrierList.add(carrier);
+						break; // FIXME revisar como hacer para que al encontrarlo salga del bucle. Como lo tendremos en BD tampoco creo que haga falta hacer esto luego...
+					}
+				}
+			}
+			inboundFlight.setMarketingCarriers(auxCarrierList);
+			
 			itinerary.setOutboundFlight(outboundFlight);
 			itinerary.setInboundFlight(inboundFlight); // TODO CHECK NOT NULL
-						
-			//5. Seteamos los precios
+			
+			//7. Seteamos los precios
 			List<PricingOptions> pricingOptions = itinieraries.getPricingOptions();
 			List<Price> prices = new ArrayList<Price>();
 			for(PricingOptions priceOption : pricingOptions){
 				Price price = new Price();
-				price.setAgent(priceOption.getAgents().toString());
+				for(String agentCode : priceOption.getAgents()){
+					//8. Buscamos las agencias a partir de los ids que tenemos
+					for(Agents agents : flightsLivePrices.getAgents()){
+						if(agentCode.equals(agents.getId())){
+							Agent agent = new Agent();
+							agent.setId(agents.getId());
+							agent.setName(agents.getName());
+							agent.setImageUrl(agents.getImageUrl());
+							agent.setBookingNumber(agents.getBookingNumber());
+							price.setAgent(agent);
+						}
+					}
+				}
 				price.setAmount(priceOption.getPrice());
 				price.setDeeplink(priceOption.getDeeplinkUrl());
 				
@@ -127,15 +229,16 @@ public class FlightsServiceImpl implements FlightsService{
 			}
 			itinerary.setPrices(prices);
 			
-			//6. Seteamos el link para recoger los detalles de la reserva
+			
+			//9. Seteamos el link para recoger los detalles de la reserva
 			BookingDetailsLink bookingDetailsLink = itinieraries.getBookingDetailsLink();
 			itinerary.setBookingDetailsLink(bookingDetailsLink.getUri() + "/" + outboundLegId + ";" + inboundLegId + "?apikey=" + FlightsRequest.API_KEY ); // TODO revisar la URL cuando se haga el polling para los details!
 			
-			//7. Anadimos el itinerario creado a la lista
+			//10. Anadimos el itinerario creado a la lista
 			itineraryList.add(itinerary);
 		}
 		
-		//8. Guardamos la lista de itinerarios en el objeto principal
+		//11. Guardamos la lista de itinerarios en el objeto principal
 		flightsResponse.setItineraryList(itineraryList);
 		
 		// FIN TRATAMIENTO RESPUESTA DE VUELOS

@@ -1,15 +1,17 @@
 package com.easytrip.rest.models.flights.response.processed;
 
+import java.util.List;
+
 public class Flight {
 	String id;
-	String originStation;
-	String destinationStation;
+	Airport originStation;
+	Airport destinationStation;
 	String departure;
 	String arrival;
 	int stops;
 	String durationInMinutes;
 	String journeyMode;
-	String marketingCarriers;
+	List<Carrier> marketingCarriers;
 	
 	public String getId() {
 		return id;
@@ -17,16 +19,16 @@ public class Flight {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getOriginStation() {
+	public Airport getOriginStation() {
 		return originStation;
 	}
-	public void setOriginStation(String originStation) {
+	public void setOriginStation(Airport originStation) {
 		this.originStation = originStation;
 	}
-	public String getDestinationStation() {
+	public Airport getDestinationStation() {
 		return destinationStation;
 	}
-	public void setDestinationStation(String destinationStation) {
+	public void setDestinationStation(Airport destinationStation) {
 		this.destinationStation = destinationStation;
 	}
 	public String getDeparture() {
@@ -59,10 +61,10 @@ public class Flight {
 	public void setJourneyMode(String journeyMode) {
 		this.journeyMode = journeyMode;
 	}
-	public String getMarketingCarriers() {
+	public List<Carrier> getMarketingCarriers() {
 		return marketingCarriers;
 	}
-	public void setMarketingCarriers(String marketingCarriers) {
+	public void setMarketingCarriers(List<Carrier> marketingCarriers) {
 		this.marketingCarriers = marketingCarriers;
 	}
 }

@@ -83,7 +83,7 @@
 <!-- 	</div> -->
 	<table>
 		<tr>
-			<th>ida ID</th>
+<!-- 			<th>ida ID</th> -->
 			<th>ida ORIGEN</th>
 			<th>ida DESTINO</th>
 			<th>ida SALIDA</th>
@@ -91,7 +91,7 @@
 			<th>ida N. ESCALAS</th>
 			<th>ida MINUTOS DEL VIAJE</th>
 			<th>ida COMPAÑIAS</th>
-			<th>vuelta ID</th>
+<!-- 			<th>vuelta ID</th> -->
 			<th>vuelta ORIGEN</th>
 			<th>vuelta DESTINO</th>
 			<th>vuelta SALIDA</th>
@@ -102,23 +102,23 @@
 			<th>PRECIOS</th>
 		</tr>
 		<tr ng-repeat="itinerary in flights.flightsData.itineraryList">
-			<td>{{itinerary.outboundFlight.id}}</td>
-			<td>{{itinerary.outboundFlight.originStation}}</td>
-			<td>{{itinerary.outboundFlight.destinationStation}}</td>
+<!-- 			<td>{{itinerary.outboundFlight.id}}</td> -->
+			<td>{{itinerary.outboundFlight.originStation.name}}({{itinerary.outboundFlight.originStation.code}})</td>
+			<td>{{itinerary.outboundFlight.destinationStation.name}}({{itinerary.outboundFlight.destinationStation.code}})</td>
 			<td>{{itinerary.outboundFlight.departure}}</td>
 			<td>{{itinerary.outboundFlight.arrival}}</td>
 			<td>{{itinerary.outboundFlight.stops}}</td>
 			<td>{{itinerary.outboundFlight.durationInMinutes}}</td>
-			<td>{{itinerary.outboundFlight.marketingCarriers}}</td>
-			<td>{{itinerary.inboundFlight.id}}</td>
-			<td>{{itinerary.inboundFlight.originStation}}</td>
-			<td>{{itinerary.inboundFlight.destinationStation}}</td>
+			<td><div ng-repeat="carrier in itinerary.outboundFlight.marketingCarriers">{{carrier.name}}({{carrier.code}})<img ng-src="{{carrier.imageUrl}}" height="20" width="20"></img></div></td>
+<!-- 			<td>{{itinerary.inboundFlight.id}}</td> -->
+			<td>{{itinerary.inboundFlight.originStation.name}}({{itinerary.inboundFlight.originStation.code}})</td>
+			<td>{{itinerary.inboundFlight.destinationStation.name}}({{itinerary.inboundFlight.destinationStation.code}})</td>
 			<td>{{itinerary.inboundFlight.departure}}</td>
 			<td>{{itinerary.inboundFlight.arrival}}</td>
 			<td>{{itinerary.inboundFlight.stops}}</td>
 			<td>{{itinerary.inboundFlight.durationInMinutes}}</td>
-			<td>{{itinerary.inboundFlight.marketingCarriers}}</td>
-			<td ng-repeat="price in itinerary.prices">{{price.agent}} || {{price.amount}} || {{price.deeplink}}</td>
+			<td><div ng-repeat="carrier in itinerary.inboundFlight.marketingCarriers">{{carrier.name}}({{carrier.code}})<img ng-src="{{carrier.imageUrl}}" height="20" width="20"></img></div></td>
+			<td><div ng-repeat="price in itinerary.prices">{{price.amount}}€ {{price.agent.name}}<img ng-src="{{price.agent.imageUrl}}"></img></div></td>
 		</tr>
 	</table>
 </md-content>

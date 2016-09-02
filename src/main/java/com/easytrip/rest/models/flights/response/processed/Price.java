@@ -1,14 +1,14 @@
 package com.easytrip.rest.models.flights.response.processed;
 
 public class Price {
-	String agent;
+	Agent agent;
 	String amount;
 	String deeplink;
 	
-	public String getAgent() {
+	public Agent getAgent() {
 		return agent;
 	}
-	public void setAgent(String agent) {
+	public void setAgent(Agent agent) {
 		this.agent = agent;
 	}
 	public String getAmount() {
