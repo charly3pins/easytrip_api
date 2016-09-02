@@ -9,12 +9,13 @@ angular
 					children : "0",
 					country : "ES",
 					currency : "EUR",
-					destPlace :"MAD",
+					destPlace :"DPS",
 					groupPricing :true,
 					infants : "0",
 					locale : "es-ES",
 					originPlace : "BCN",
 					outboundDate : new Date(),
+					inboundDate : new Date(),
 					locationSchema : "Iata",
 					cabinClass : "Economy"};
 		

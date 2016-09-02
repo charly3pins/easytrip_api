@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Itineraries {
 	@JsonProperty("OutboundLegId")
 	String outboundLegId;
+	@JsonProperty("InboundLegId")
+	String inboundLegId;
 	@JsonProperty("PricingOptions")
 	List<PricingOptions> pricingOptions;
 	@JsonProperty("BookingDetailsLink")
@@ -17,6 +19,12 @@ public class Itineraries {
 	}
 	public void setOutboundLegId(String outboundLegId) {
 		this.outboundLegId = outboundLegId;
+	}
+	public String getInboundLegId() {
+		return inboundLegId;
+	}
+	public void setInboundLegId(String inboundLegId) {
+		this.inboundLegId = inboundLegId;
 	}
 	public List<PricingOptions> getPricingOptions() {
 		return pricingOptions;
@@ -30,5 +38,6 @@ public class Itineraries {
 	public void setBookingDetailsLink(BookingDetailsLink bookingDetailsLink) {
 		this.bookingDetailsLink = bookingDetailsLink;
 	}
+	
 	
 }

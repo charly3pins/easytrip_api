@@ -21,7 +21,7 @@ public class QueryParams {
 	String destinationPlace;
 	@JsonProperty("OutboundDate")
 	String outboundDate;
-	@JsonProperty("IutboundDate")
+	@JsonProperty("InboundDate")
 	String inboundDate;
 	@JsonProperty("LocationSchema")
 	String locationSchema;
