@@ -29,19 +29,13 @@ angular
       		});
 		}
 		
-		vm.searchText = "";
+		vm.searchText = "Barcelona";
 		vm.selectedItem = [];
 		vm.searchTextChange = function () {
 			if(vm.searchText.length > 2){ // a partir de 2 carácteres buscamos en la API
 				return $http.get("http://localhost:8080/easytripAPI/rest/hotels/getSuggestHotels/"+vm.searchText)
 					.then(function(response){
 						return response.data;
-//						if(typeof response.data === 'object'){
-//							return response.data;
-//						} else {
-//							// invalid response
-//							return $q.reject(response.data);
-//						}
 					}, 
 					function(response){
 						// something went wrong
@@ -52,6 +46,8 @@ angular
 		
 		// cuando cambia el valor del autocomplete, entramos aquí para hacer el binding con la property de nuestro formData
 		vm.selectedItemChange = function () {
-			vm.formData.entityId = vm.selectedItem.individual_id;
+		   if(vm.selectedItem != null){
+			   vm.formData.entityId = vm.selectedItem.individual_id;
+		   }
 		}
 	}]);

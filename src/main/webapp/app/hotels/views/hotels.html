@@ -52,8 +52,16 @@
 	</div>
 	<div>
 		<h4>RESULTS {{hotels.items.length}}</h4>
-<div  ng-repeat="hotel in hotels.items">
-Name : {{hotel.name}} || Id : {{hotel.hotel_id}} || Popularidad : {{hotel.popularity}} || Calidad : {{hotel.popularity_desc}} || Stars : {{hotel.star_rating}}
+<div ng-repeat="hotel in hotels.items">
+<div style="width:50%;">
+<img width="500px" height="300px" src="{{hotel.origPictureUrls[0]}}">
+</div>
+<div style="width:50%;position: relative;bottom: 300px; left:554px">
+<strong>Name: </strong><span>{{hotel.name}}</span></br>
+<strong>Popularidad: </strong><span>{{hotel.popularity}}</span></br>
+<strong>Stars: </strong><span>{{hotel.star_rating}}</span></br>
+<strong>Tipo: </strong><span>{{hotel.types[0]}}</span>
+</div>
 </div>
 	</div>
 </md-content>
