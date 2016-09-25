@@ -20,7 +20,7 @@ public class FlightsRestController {
     @Autowired
     LocationAutosuggestService locationAutosuggestService;
     
-    @RequestMapping(value = {"/getSuggestLocation/{query}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/suggestLocation/{query}"}, method = RequestMethod.GET)
     public  @ResponseBody String getSuggestLocation( @PathVariable String query )   {		
     	try {
 			return locationAutosuggestService.getSuggestLocation(query);
