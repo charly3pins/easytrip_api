@@ -48,8 +48,8 @@ public class FlightsServiceImpl implements FlightsService{
 	    		+ "&locale=" + flightsRequest.getLocale() 
 	    		+ "&originplace=" + flightsRequest.getOriginPlace() 
 	    		+ "&destinationplace=" + flightsRequest.getDestPlace()
-	    		+ "&outbounddate=2016-09-15" //TODO dates hardcoded fins que les tractem
-	    		+ "&inbounddate=2016-09-28" //TODO dates hardcoded fins que les tractem
+	    		+ "&outbounddate=2016-12-15" //TODO dates hardcoded fins que les tractem
+	    		+ "&inbounddate=2016-12-28" //TODO dates hardcoded fins que les tractem
 	    		+ "&locationschema=" + flightsRequest.getLocationSchema() 
 	    		+ "&adults=" + flightsRequest.getAdults() ;   
 

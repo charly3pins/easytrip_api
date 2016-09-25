@@ -1,24 +1,29 @@
 <md-content class="md-padding">
 	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
 		<form name="projectForm" ng-submit="flights.submit()">
-			<md-input-container layout="row">
-				<label>API Key</label>
-				<input required type="text" name="apiKey" id="apiKey" ng-model="flights.formData.apiKey"></input>
-			</md-input-container>
+			<md-autocomplete md-input-name="autocompleteFieldOrigin" md-selected-item="flights.selectedItemOrigin" 
+				md-search-text="flights.searchTextOrigin"
+				md-selected-item-change="flights.selectedItemChangeOrigin()" 
+				md-items="item in flights.searchTextChangeOrigin()" md-item-text="item.PlaceName" 
+				md-floating-label="Origen">
+				<md-item-template>
+					<span md-highlight-text="flights.searchTextOrigin">{{item.PlaceName}} ({{item.PlaceId}})</span>
+				</md-item-template>
+			</md-autocomplete>
+			
+			<md-autocomplete md-input-name="autocompleteFieldDest" md-selected-item="flights.selectedItemDest" 
+				md-search-text="flights.searchTextDest"
+				md-selected-item-change="flights.selectedItemChangeDest()" 
+				md-items="item in flights.searchTextChangeDest()" md-item-text="item.PlaceName" 
+				md-floating-label="Destino">
+				<md-item-template>
+					<span md-highlight-text="flights.searchTextDest">{{item.PlaceName}} ({{item.PlaceId}})</span>
+				</md-item-template>
+			</md-autocomplete>
 			
 			<md-checkbox class="md-primary" aria-label="Group Pricing" name="groupPricing" id="groupPricing" layout="row" ng-model="flights.formData.groupPricing">
 				Group Pricing
 			</md-checkbox>
-
-			<md-input-container>
-				<label>Origen</label>
-				<input required type="text" name="originPlace" id="originPlace" ng-model="flights.formData.originPlace"></input>
-			</md-input-container>
-
-			<md-input-container>
-				<label>Destino</label>
-				<input required type="text" name="destinationPlace" id="destinationPlace"  ng-model="flights.formData.destPlace"></input>
-			</md-input-container>
 			
 			<md-datepicker required md-placeholder="Fecha de salida" name="outboundDate" id="outboundDate" ng-model="flights.formData.outboundDate"></md-datepicker>
 			
