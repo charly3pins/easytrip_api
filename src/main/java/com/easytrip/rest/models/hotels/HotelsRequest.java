@@ -10,7 +10,9 @@ public class HotelsRequest {
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static String HOTELS_AUTOSUGGEST_URL = "http://partners.api.skyscanner.net/apiservices/hotels/autosuggest/v2/";
 	@JsonIgnoreProperties(ignoreUnknown = true)
-	public static String BASE_URL = "http://partners.api.skyscanner.net/";	
+	public static String BASE_URL = "http://partners.api.skyscanner.net";	
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String HOTELS_DETAILS = "http://partners.api.skyscanner.net/apiservices/hotels/livedetails/v3/details/";	
 	///{market}/{currency}/{locale}/{entityid}/{checkindate}/{checkoutdate}/{guests}/{rooms}?apiKey={apiKey}[&pageSize={pageSize}][&imageLimit={imageLimit}]
 	String pageSize;
 	String imageLimit;

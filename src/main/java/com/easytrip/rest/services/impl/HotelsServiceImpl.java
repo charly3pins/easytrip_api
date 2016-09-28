@@ -90,6 +90,9 @@ public class HotelsServiceImpl implements HotelsService {
 		response = cService.getResponseFromConnection(conn);
 			
 		String requestPoll = HotelsRequest.BASE_URL + conn.getHeaderFields().get("Location").get(0);
+		String sessionId = requestPoll.replace(HotelsRequest.HOTELS_URL, "");
+		System.out.println(requestPoll);
+		System.out.println(sessionId);
 		conn.disconnect();
 			
 		URL urlPoll = new URL (requestPoll);
@@ -104,10 +107,29 @@ public class HotelsServiceImpl implements HotelsService {
 		List<Hotel> hotelsList = Arrays.asList(mapper.readValue(hotels.toString(), 
 				Hotel[].class));
 		String hotelListString = mapper.writeValueAsString(hotelsList);
-//		for(Hotel h : hotelsList){
-//			System.out.println(h.toString());
-//		}
+		String hotelIds = "";
+		for(Hotel h : hotelsList){
+			hotelIds += h.getHotel_id().toString() + ",";
+		}
+		hotelIds = hotelIds.length() > 0 ? hotelIds.substring(0, hotelIds.length() - 1): "";
+		
+		urlPoll = new URL ( HotelsRequest.HOTELS_DETAILS + sessionId + "&hotelIds=" + hotelIds);
+		System.out.println( HotelsRequest.HOTELS_DETAILS + sessionId + "&hotelIds=" + hotelIds);
+	    conn = cService.doConnection(urlPoll, "GET");
 
+		response = cService.getResponseFromConnection(conn);
+		
+		requestPoll = HotelsRequest.BASE_URL + conn.getHeaderFields().get("Location").get(0);
+		System.out.println(requestPoll);
+		conn.disconnect();
+			
+		urlPoll = new URL (requestPoll);
+	    conn = cService.doConnection(urlPoll, "GET");
+
+		response = cService.getResponseFromConnection(conn);
+		
+		System.out.println(response.toString());
+		
 //		return Response.status(200).entity(hotels.toString()).build();
 		return hotelListString.toString();
 	}
