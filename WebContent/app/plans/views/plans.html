@@ -1,0 +1,33 @@
+<md-content class="md-padding">
+<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
+	<form name="projectForm" ng-submit="plans.submit()">
+
+		<md-input-container> <label>Punto</label> <input
+			required type="text" ng-model="plans.formData.latitudeLongitude"
+			name="latitudeLongitude" id="latitudeLongitude"></input> </md-input-container>
+
+		<md-input-container> <label>Lugar</label> <input
+			required type="text" ng-model="plans.formData.near" name="near"
+			id="near"></input> </md-input-container>
+
+		<md-input-container> <label>Section</label> <input
+			required type="text" ng-model="plans.formData.section" name="section"
+			id="section"></input> </md-input-container>
+
+		<md-datepicker required ng-model="plans.formData.placeDate"
+			md-placeholder="Fecha" name="placeDate" id="placeDate"></md-datepicker>
+
+		<section layout="row" layout-sm="column" layout-align="center center"
+			layout-wrap>
+			<md-button type="submit" aria-label="Find"
+				class="md-raised md-primary">BUSCAR</md-button>
+		</section>
+	</form>
+</div>
+<div>
+	<h4>RESULTS</h4>
+	<table id="plansData" border="1">
+		{{plans.plansData}}
+	</table>
+</div>
+</md-content>

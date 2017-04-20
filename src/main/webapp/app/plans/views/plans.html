@@ -1,28 +1,69 @@
 <md-content class="md-padding">
-	<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
-		<form name="projectForm" ng-submit="plans.submit()">
-			
-			<md-input-container>
-				<label>Punto</label>
-				<input required type="text" ng-model="plans.formData.latitudeLongitude" name="latitudeLongitude" id="latitudeLongitude"></input>
-			</md-input-container>
-			
-			<md-input-container>
-				<label>Lugar</label>
-				<input required type="text" ng-model="plans.formData.near" name="near" id="near"></input>
-			</md-input-container>
-			
-			<md-datepicker required ng-model="plans.formData.placeDate" md-placeholder="Fecha" name="placeDate" id="placeDate"></md-datepicker>
+<div flex-sm="100" flex-gt-sm="80" layout-sm="column">
 
-			<section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
-				<md-button type="submit" aria-label="Find" class="md-raised md-primary">BUSCAR</md-button>
-			</section>
-		</form>
+	<!-- 	<md-input-container> <label>Punto</label> <input -->
+	<!-- 		required type="text" ng-model="plans.formData.latitudeLongitude" -->
+	<!-- 		name="latitudeLongitude" id="latitudeLongitude"></input> </md-input-container> -->
+
+	<!-- INPUT CIUDAD -->
+	<md-input-container> <label>Lugar</label> <input required type="text"
+		ng-model="plans.formData.near" name="near" id="near"></input> </md-input-container>
+	<md-input-container> <label>Coordenadas</label> <input required type="text"
+		ng-model="plans.formData.coordenadas" name="coordenadas" id="coordenadas"></input> </md-input-container>
+	<md-input-container> <label>Nº Resultados</label> <input required type="number"
+		ng-model="plans.formData.limit" name="limit" id="limit"></input> </md-input-container>
+	<!-- 	<md-datepicker required ng-model="plans.formData.placeDate" -->
+	<!-- 		md-placeholder="Fecha" name="placeDate" id="placeDate"></md-datepicker> -->
+
+	<div id="results" style="clear: both;">
+		<div id="search" style="float: left; width: 100%;">
+
+			<div style="clear: both; float: rigth;">
+				<md-button ng-click="plans.search()" aria-label="Find" class="md-raised md-primary">SEARCH</md-button>
+				<h4>RESULTS SEARCH {{plans.resultSearchVenues.length}}</h4>
+			</div>
+			<div ng-repeat="searchVenue in plans.resultSearchVenues" style="clear: both;">
+				<div style="float: left;">
+					<h4>Name: {{searchVenue.name}}</h4>
+					<h6>Rating: {{searchVenue.rating}}</h6>
+					<div ng-repeat="timeframe in searchVenue.hours.timeframes">
+						<h6>Día: {{timeframe.days}} || {{timeframe.open}}</h6>
+					</div>
+					<h6>Location: lat: {{searchVenue.location.lat}} , lng: {{searchVenue.location.lng}}</h6>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div>
-		<h4>RESULTS</h4>
-		<table id="plansData" border="1">
-			{{plans.plansData}}
-		</table>
-	</div>
-</md-content>
+	</md-content>
+	<!-- 		<div style="float: left;"> -->
+	<!-- 			<md-button ng-click="plans.venueByIdSearch(searchVenue)" aria-label="Find" class="md-raised md-primary">VER -->
+	<!-- 			DETALLES</md-button> -->
+	<!-- 		</div> -->
+
+	<!-- 			|| Lat: {{item.venue.location.lat}} || Long: {{item.venue.location.lng}} -->
+
+	<!-- 	<div id="explore" style="float: left; width:50%;"> -->
+	<!-- 		<div style="float: left;"> -->
+	<!-- 			<md-button ng-click="plans.explore()" aria-label="Find" class="md-raised md-primary">EXPLORE</md-button> -->
+	<!-- 			<h4>RESULTS EXPLORE {{plans.items.length}}</h4> -->
+	<!-- 		</div> -->
+
+
+	<!-- 	<div ng-repeat="item in plans.items" style="clear: both;"> -->
+	<!-- 		<div style="float: left;"> -->
+	<!-- 			<p>Name: {{item.venue.name}} || Rating: {{item.venue.rating}}</p> -->
+	<!-- 		</div> -->
+	<!-- <!-- 		<div style="float: left;"> -->
+	
+	<!-- <!-- 			<md-button ng-click="plans.venueById(item)" aria-label="Find" class="md-raised md-primary">VER DETALLES</md-button> -->
+	
+	<!-- <!-- 		</div> -->
+	
+	<!-- 		<div ng-repeat="timeframe in item.detalle.hours.timeframes"> -->
+	<!-- 			<h6>Día: {{timeframe.days}} || {{timeframe.open}}</h6> -->
+
+	<!-- 			<!-- 			|| Lat: {{item.venue.location.lat}} || Long: {{item.venue.location.lng}} -->
+	
+	<!-- 		</div> -->
+	<!-- 	</div> -->
+	<!-- 	</div> -->
