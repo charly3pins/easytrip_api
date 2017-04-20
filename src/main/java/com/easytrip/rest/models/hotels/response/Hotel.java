@@ -100,7 +100,7 @@ public class Hotel {
 	public void setImage_urls(List<String> image_urls) {
 		List<String> urls = new LinkedList<String>();
 		for(String image : image_urls){
-			urls.add(IMAGE_BASE_URL + image.replaceAll(".*available\\{\\/", "").replaceAll("\\/:.*", "\\/") + HotelImages.ORIG);
+			//urls.add(IMAGE_BASE_URL + image.replaceAll(".*available\\{\\/", "").replaceAll("\\/:.*", "\\/") + HotelImages.ORIG);
 		}
 		this.origPictureUrls = urls;
 		this.image_urls = image_urls;

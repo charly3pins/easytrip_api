@@ -10,15 +10,27 @@ public class PlansRequest {
 	@JsonIgnoreProperties(ignoreUnknown = true)
 	public static String REDIRECT_CALLBACK = "Callback URL";
 	
-	String latitudeLongitude;
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String OAuth = "1PGZEAUTMYNUQ4HTUQOKKDBDCTQG1OQEJCBEOV1JMKGOSHYL";
+	@JsonIgnoreProperties(ignoreUnknown = true)
+	public static String BASE_URL = "https://api.foursquare.com/v2/";
+	
+	String method;
+	
+	String coordenadas;
 	String near;
 	String placeDate;
+	Integer limit;
+	String offset;
 	
-	public String getLatitudeLongitude() {
-		return latitudeLongitude;
+	//explore
+	String section;
+	
+	public String getCoordenadas() {
+		return coordenadas;
 	}
-	public void setLatitudeLongitude(String latitudeLongitude) {
-		this.latitudeLongitude = latitudeLongitude;
+	public void setCoordenadas(String coordenadas) {
+		this.coordenadas = coordenadas;
 	}
 	public String getNear() {
 		return near;
@@ -31,5 +43,29 @@ public class PlansRequest {
 	}
 	public void setPlaceDate(String placeDate) {
 		this.placeDate = placeDate;
+	}
+	public String getSection() {
+		return section;
+	}
+	public void setSection(String section) {
+		this.section = section;
+	}
+	public String getMethod() {
+		return method;
+	}
+	public void setMethod(String method) {
+		this.method = method;
+	}
+	public Integer getLimit() {
+		return limit;
+	}
+	public String getOffset() {
+		return offset;
+	}
+	public void setLimit(Integer limit) {
+		this.limit = limit;
+	}
+	public void setOffset(String offset) {
+		this.offset = offset;
 	} 
 }
