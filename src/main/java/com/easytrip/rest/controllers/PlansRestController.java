@@ -1,6 +1,5 @@
 package com.easytrip.rest.controllers;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,33 +16,14 @@ public class PlansRestController {
     @Autowired
     PlansService plansService;
  
-    @RequestMapping(value = {"/plans/explore"}, method = RequestMethod.POST)
-    public  @ResponseBody String getVenuesExplore( @RequestBody PlansRequest plansRequest )   {		
+    @RequestMapping(value = {"/plans"}, method = RequestMethod.POST)
+    public  @ResponseBody String getVenues( @RequestBody PlansRequest plansRequest )   {		
     	try {
-			return plansService.getVenuesExplore(plansRequest);
+			return plansService.getVenues(plansRequest);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 		return "Error";
     }
     
-    @RequestMapping(value = {"/plans/search"}, method = RequestMethod.POST)
-    public  @ResponseBody String getVenuesSearch( @RequestBody PlansRequest plansRequest )   {		
-    	try {
-			return plansService.getVenuesSearch(plansRequest);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return "Error";
-    }
-    
-    @RequestMapping(value = {"/plans/venueById"}, method = RequestMethod.POST)
-    public  @ResponseBody String getVenues( @RequestBody String id )   {		
-    	try {
-			return plansService.getVenueByIdToString(id);
-		} catch (Exception e) {
-			System.out.println(e);
-		}
-		return "Error";
-    }
 }
