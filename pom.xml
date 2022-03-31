@@ -10,7 +10,7 @@
 	<name>EasyTrip API Restfull Web App</name>
 
 	<properties>
-        <springframework.version>4.2.0.RELEASE</springframework.version>
+        <springframework.version>5.3.18</springframework.version>
         <jackson.version>2.6.3</jackson.version>
         <foursquare.version>1.0.6</foursquare.version>
     </properties>
