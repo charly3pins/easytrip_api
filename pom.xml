@@ -11,7 +11,7 @@
 
 	<properties>
         <springframework.version>4.2.0.RELEASE</springframework.version>
-        <jackson.version>2.6.3</jackson.version>
+        <jackson.version>2.12.7.1</jackson.version>
         <foursquare.version>1.0.6</foursquare.version>
     </properties>
     
